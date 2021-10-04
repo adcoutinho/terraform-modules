@@ -27,11 +27,11 @@ data "aws_ami" "this" {
     }
 }
 
-module "user-data" {
-    source      = "../aws-user-data"
-
-    instance_domain_name    = var.instance_domain_name
-}
+#module "user-data" {
+#    source      = "../aws-user-data"
+#
+#    instance_domain_name    = var.instance_domain_name
+#}
 
 resource "aws_launch_template" "this" {
     name_prefix     = "${var.project}-"
@@ -60,7 +60,7 @@ resource "aws_launch_template" "this" {
         security_groups     = data.aws_security_groups.this.ids
     }
 
-    user_data   = module.user_data.encoded_user_Date
+#    user_data   = module.user_data.encoded_user_Date
 
     key_name    = var.key_name
 
@@ -129,4 +129,3 @@ resource "aws_autoscaling_group" "this" {
         prevent_destroy     = true
     }
 }
-
